@@ -45,7 +45,7 @@ public class UserRestControllerIntegrationTest {
 
         given(userService.getUsers()).willReturn(allUsers);
 
-        mvc.perform(get("/user/")
+        mvc.perform(get("/api/users")
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$", hasSize(3)))
@@ -62,7 +62,7 @@ public class UserRestControllerIntegrationTest {
 
         given(userService.findUserByEmail(user.email())).willReturn(user);
 
-        mvc.perform(get("/user/email/email2@compagny.com")
+        mvc.perform(get("/api/users/email/email2@compagny.com")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", is(user.firstName())))
@@ -74,7 +74,7 @@ public class UserRestControllerIntegrationTest {
         UserDto user = UserDto.builder().id(1L).firstName("fn1").lastName("ln1").email("email1@compagny.com").build();
         given(userService.saveUser(Mockito.any())).willReturn(user);
 
-        mvc.perform(post("/user/save").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(user)))
+        mvc.perform(post("/api/users").contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(user)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.firstName", is("fn1")))

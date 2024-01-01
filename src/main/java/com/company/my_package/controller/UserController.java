@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 @Tag(name = "Users managment Rest API")
 public class UserController {
 
@@ -21,7 +21,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/users")
+    @Operation(summary = "Get a list of users")
     public ResponseEntity<Iterable<UserDto>> users() {
         try {
             return ResponseEntity.ok(userService.getUsers());
@@ -30,14 +31,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/email/{email}")
-    @Operation(summary = "Find an user by his email")
+    @GetMapping("/users/email/{email}")
+    @Operation(summary = "Find a user by his email")
     public ResponseEntity<UserDto> findUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userService.findUserByEmail(email));
     }
 
-    @PostMapping("/save")
-    @Operation(summary = "Save an user")
+    @PostMapping("/users")
+    @Operation(summary = "Save a user")
     public ResponseEntity<UserDto> saveUser(@RequestBody UserDto user) {
         try {
             return ResponseEntity.ok(userService.saveUser(user));
@@ -46,8 +47,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Delete an user")
+    @DeleteMapping("/users/{id}")
+    @Operation(summary = "Delete a user")
     public ResponseEntity<Long> deleteIntervenant(@PathVariable Long id) {
         try {
             userService.deleteUser(id);

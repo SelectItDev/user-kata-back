@@ -1,7 +1,7 @@
 server:
   port: 8080
-  servlet:
-    context-path: /api/v1
+  #servlet:
+    #context-path: /api/v1
   max-http-header-size: 40KB
   error:
     include-message: ALWAYS
