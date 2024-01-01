@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: user-kata
+  #profiles:
+    #active: test
+
+
+  ## default connection pool
+  datasource:
+    #    data: classpath:data_aaaaaaaa.sql
+    ## H2
+    url: >
+      jdbc:h2:mem:user_kata_test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+        enable_lazy_load_no_trans: true
+        event:
+          merge:
+            entity_copy_observer: allow
+    defer-datasource-initialization: true
+  ## liquibase
+  liquibase:
+    enabled: false
+  # Enabling H2 Console
+  h2:
+    console:
+      enabled: true
+
+      # Custom H2 Console URL
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    org:
+      springframework: INFO
+    com:
+      rte: INFO
+    root: ERROR

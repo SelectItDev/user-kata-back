@@ -1,0 +1,64 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+  max-http-header-size: 40KB
+  error:
+    include-message: ALWAYS
+
+application:
+  front:
+    url: http://localhost:4200/
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user-kata-bd
+    username: postgres
+    password: mpasSY.G6tt_na1
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/user-kata-bd-changelog.xml
+    drop-first: true
+
+# Logs
+logging:
+  level:
+    org:
+      springframework: debug
+    com:
+      rte: debug
+    root: INFO
+
+# Swagger V3 config
+springdoc:
+  swagger-ui:
+    #path: /swagger-ui-custom.html
+    #url: ../v3/api-docs
+    #config-url: /user/api/v3/api-docs/swagger-config
+
+  # Spécifique Survet
+  swagger:
+    api:
+      info:
+        title: Users managment Kata
+        description: Users managment Kata
+        version: 0.0.1-SNAPSHOT
+      contact:
+        name: Lyes LAKEHAL
+        email: lyes.lakehal@gmail.com
+
+rest:
+  security:
+    cors:
+      allowed-origins: ${application.front.url}
+      allowed-headers: "*"
+      allowed-methods: GET,POST,DELETE
+      max-age: 3600
