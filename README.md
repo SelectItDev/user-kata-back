@@ -13,4 +13,4 @@ Voir les end-points sur Open API / Swagger :
 - Java v 17
 - Spring-boot v 3.2.0
 - Postgres v 15
-- Server port 8080
+- @: http://localhost:8080/ (Il faut garder ce port car il est utilisé pour les appels API depuis le front)
