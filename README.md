@@ -13,4 +13,5 @@ Voir les end-points sur Open API / Swagger :
 - Java v 17
 - Spring-boot v 3.2.0
 - Postgres v 15
+- IL faut créer une base de donnée "user-kata-bd", le reste est créé par liquibase
 - @: http://localhost:8080/ (Il faut garder ce port car il est utilisé pour les appels API depuis le front)
